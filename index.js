@@ -15,7 +15,11 @@ import connectDB from "./config/db.js";
 
 
 connectDB();
+app.use(express.urlencoded({extended:false}));
 app.use(express.json());
+
+app.use("/uploads", express.static("./uploads"));
+
 
 app.use((err, req, res, next) => {
     const errStatus = err.status || 500;
