@@ -1,11 +1,18 @@
-import express from "express"
-import imageHandler from "../middlewares/imageHandler"
-const router = express.Router()
+import express from "express";
+import imageHandler from "../middlewares/imageHandler";
+import {
+  addTeamMember,
+  deleteTeamMember,
+  editTeamMember,
+  getMember,
+  getMembers,
+} from "../controllers/team";
+const router = express.Router();
 
-router.get("/", getTeams)
-router.get("/id/:id", getTeam)
-router.post("/", imageHandler, addTeam)
-router.patch("/id/:id", editTeam)
-router.delete("/id/:id", deleteTeam)
+router.get("/", getMembers);
+router.get("/id/:id", getMember);
+router.post("/", imageHandler, addTeamMember);
+router.patch("/id/:id", editTeamMember);
+router.delete("/id/:id", deleteTeamMember);
 
-export default router
+export default router;
