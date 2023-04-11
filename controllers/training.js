@@ -32,6 +32,9 @@ export const addTraining = async (req, res) => {
       name: req.body.name,
       description: req.body.description,
       image: req.imagePath,
+      isGiven: req.body.isGiven,
+      start_at: req.body.start_at,
+      end_at: req.body.end_at,
     });
 
     await newTraining.save();
@@ -48,6 +51,9 @@ export const editTraining = async (req, res) => {
       name: req.body.name,
       description: req.body.description,
       image: req.body.imagePath,
+      isGiven: req.body.isGiven,
+      start_at: req.body.start_at,
+      end_at: req.body.end_at,
     };
     const training = await trainingModel.findById(req.params.id);
 
@@ -78,18 +84,14 @@ export const editTraining = async (req, res) => {
 // Delete a training
 export const deleteTraining = async (req, res) => {
   try {
-    await trainingModel
-      .findByIdAndDelete(req.params.id)
-      .then((response) => {
-        if (!response) {
-          res.status(404).send({ status: 404, message: "Not Found" });
-        } else {
-          fs.unlinkSync(response.image);
-          res
-            .status(200)
-            .send({ status: 200, message: "Deleted successfully" });
-        }
-      });
+    await trainingModel.findByIdAndDelete(req.params.id).then((response) => {
+      if (!response) {
+        res.status(404).send({ status: 404, message: "Not Found" });
+      } else {
+        fs.unlinkSync(response.image);
+        res.status(200).send({ status: 200, message: "Deleted successfully" });
+      }
+    });
   } catch (error) {
     res.json({ err: error.message });
   }
