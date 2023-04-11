@@ -7,7 +7,7 @@ export const getMembers = async (req, res) => {
     const teams = await teamMemberModel.find();
     res.status(200).json({ message: teams });
   } catch (error) {
-    res.json({ message: error.message });
+    res.json({ err: error.message });
   }
 };
 
@@ -21,7 +21,7 @@ export const getMember = async (req, res) => {
 
     res.status(200).json({ message: team });
   } catch (error) {
-    res.json({ message: error.message });
+    res.json({ err: error.message });
   }
 };
 
@@ -34,16 +34,10 @@ export const addTeamMember = async (req, res) => {
       image: req.imagePath,
     });
 
-    await newTeam.save((err, response) => {
-      if (err) return res.json(err);
-      res.send({
-        status: 200,
-        message: "Team member added successfuly",
-        response,
-      });
-    });
+    await newTeam.save();
+    res.status(200).json({ message: newTeam });
   } catch (error) {
-    res.json({ message: error.message });
+    res.json({ err: error.message });
   }
 };
 
@@ -59,7 +53,7 @@ export const editTeamMember = async (req, res) => {
 
     // check if the member does not exist
     if (!member) {
-      return res.status(404).send({ status: 404, message: "Not Found" });
+      return res.status(404).json({ status: 404, message: "Not Found" });
     }
 
     // delete the old image
@@ -74,25 +68,29 @@ export const editTeamMember = async (req, res) => {
         new: true,
       }
     );
-    res.status(200).json({ data: updatedMember });
+
+    res.status(200).json({ message: updatedMember });
   } catch (error) {
-    res.json({ message: error.message });
+    res.json({ err: error.message });
   }
 };
 
 // Delete a team member
 export const deleteTeamMember = async (req, res) => {
   try {
-    const deleteTeamMember = await teamMemberModel.findByIdAndDelete(
-      req.params.id
-    );
-
-    // Check if the team member does not exist
-    if (!deleteTeamMember)
-      return res.json({ status: 404, message: "Not found" });
-
-    res.status(202).json({ message: "team member deleted successfully" });
+    await teamMemberModel
+      .findByIdAndDelete(req.params.id)
+      .then((response) => {
+        if (!response) {
+          res.status(404).send({ status: 404, message: "Not Found" });
+        } else {
+          fs.unlinkSync(response.image);
+          res
+            .status(200)
+            .send({ status: 200, message: "Deleted successfully" });
+        }
+      });
   } catch (error) {
-    res.json({ message: error.message });
+    res.json({ err: error.message });
   }
 };
