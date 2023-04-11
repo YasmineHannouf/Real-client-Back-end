@@ -3,6 +3,10 @@ const app = express();
 
 import cookieParser from "cookie-parser";
 
+// import cors and use it
+import cors from "cors";
+app.use(cors());
+
 // import and config dotenv
 import dotenv from "dotenv";
 dotenv.config();
