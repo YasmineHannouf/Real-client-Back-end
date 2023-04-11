@@ -1,4 +1,4 @@
-import trainingModel from "../models/team.js";
+import trainingModel from "../models/training.js";
 import fs from "fs";
 
 // Get all trainings
@@ -50,7 +50,7 @@ export const editTraining = async (req, res) => {
     let update = {
       name: req.body.name,
       description: req.body.description,
-      image: req.body.imagePath,
+      image: req.imagePath,
       isGiven: req.body.isGiven,
       start_at: req.body.start_at,
       end_at: req.body.end_at,

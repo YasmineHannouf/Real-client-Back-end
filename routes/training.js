@@ -1,6 +1,5 @@
 import express from "express";
 import imageHandler from "../middlewares/imageHandler.js";
-import {} from "../controllers/team.js";
 import {
   addTraining,
   deleteTraining,

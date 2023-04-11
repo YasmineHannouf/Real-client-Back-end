@@ -12,7 +12,7 @@ import connectDB from "./config/db.js";
 
 // import routes
 import teamRoutes from "./routes/team.js";
-import trainingRoutes from "./routes/team.js";
+import trainingRoutes from "./routes/training.js";
 
 connectDB();
 app.use(express.urlencoded({ extended: false }));

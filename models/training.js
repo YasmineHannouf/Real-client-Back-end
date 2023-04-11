@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-const teamMemberSchema = Schema(
+const trainingSchema = Schema(
   {
     name: {
       type: String,
@@ -32,5 +32,5 @@ const teamMemberSchema = Schema(
   }
 );
 
-const Model = model("training", teamMemberSchema);
+const Model = model("training", trainingSchema);
 export default Model;
