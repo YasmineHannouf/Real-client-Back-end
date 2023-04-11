@@ -18,6 +18,8 @@ const adminSchema = new Schema({
     required: [true, "Please enter a username"],
     min: 2,
    }
+},{
+  timestamps:true,
 });
 
 const Admins = model("admins", adminSchema);
