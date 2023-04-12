@@ -3,6 +3,7 @@ import AboutusRoutes from "./routes/aboutus.js";
 const app = express();
 
 import cookieParser from "cookie-parser";
+import contactusRoutes from "./routes/contactusRoute.js";
 
 
 // import and config dotenv
@@ -40,6 +41,7 @@ app.use((err, req, res, next) => {
   });
 });
 
+  app.use('/api/contactus',contactusRoutes);
 app.listen(5000, () => {
   console.log("listening on port 5000");
 });
