@@ -1,9 +1,7 @@
 import express from "express";
-import AboutusRoutes from "./routes/aboutus.js";
 const app = express();
 
 import cookieParser from "cookie-parser";
-import contactusRoutes from "./routes/contactusRoute.js";
 
 
 // import and config dotenv
@@ -16,6 +14,9 @@ import connectDB from "./config/db.js";
 // import routes
 import teamRoutes from "./routes/team.js";
 import trainingRoutes from "./routes/training.js";
+import AboutusRoutes from "./routes/aboutus.js";
+import serviceRoutes from "./routes/service.js";
+import contactusRoutes from "./routes/contactusRoute.js";
 
 
 connectDB();
@@ -29,6 +30,7 @@ app.use("/uploads", express.static("./uploads"));
 app.use("/team", teamRoutes);
 app.use("/training", trainingRoutes);
 app.use("/aboutus",AboutusRoutes)
+app.use("/service",serviceRoutes)
 
 
 app.use((err, req, res, next) => {
