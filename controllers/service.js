@@ -5,21 +5,21 @@ import fs from "fs";
 export const getServices = async (req, res) => {
   try {
     const services = await serviceModel.find();
-    res.status(200).json({ message: teams });
+    res.status(200).json({ message: services });
   } catch (error) {
     res.json({ err: error.message });
   }
 };
 
 // Get service by id
-export const getservice = async (req, res) => {
+export const getService = async (req, res) => {
   try {
-    const team = await serviceModel.findById(req.params.id);
+    const service = await serviceModel.findById(req.params.id);
 
-    // check if team doesn't exist
-    if (!team) return res.json("team Not Found");
+    // check if service doesn't exist
+    if (!service) return res.json("Service Not Found");
 
-    res.status(200).json({ message: team });
+    res.status(200).json({ message: service });
   } catch (error) {
     res.json({ err: error.message });
   }
@@ -28,14 +28,14 @@ export const getservice = async (req, res) => {
 // Add a new service
 export const addService = async (req, res) => {
   try {
-    const newTeam = new serviceModel({
+    const newService = new serviceModel({
       name: req.body.name,
       description: req.body.description,
       image: req.imagePath,
     });
 
-    await newTeam.save();
-    res.status(200).json({ message: newTeam });
+    await newService.save();
+    res.status(200).json({ message: newService });
   } catch (error) {
     res.json({ err: error.message });
   }

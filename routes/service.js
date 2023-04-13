@@ -5,7 +5,7 @@ import {
   deleteService,
   editService,
   getServices,
-  getservice,
+  getService,
 } from "../controllers/service.js";
 const router = express.Router();
 
@@ -13,7 +13,7 @@ const router = express.Router();
 router.get("/", getServices);
 
 // Get service route by id
-router.get("/id/:id", getservice);
+router.get("/id/:id", getService);
 
 // Add service route
 router.post("/", imageHandler, addService);
