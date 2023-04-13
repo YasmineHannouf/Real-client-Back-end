@@ -8,6 +8,7 @@ const connectDB = async () => {
     .connect(process.env.MONGO_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      dbName:process.env.DB_NAME,
     })
     .then(() => {
       console.log("Connected to mongoDB");
