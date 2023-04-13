@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-
+import serviceModel from "./service.js"
 const projectSchema = Schema({
   title: {
     type: String,
@@ -18,8 +18,13 @@ const projectSchema = Schema({
   },
   service_id: {
     type: Schema.Types.ObjectId,
-    ref: "Service",
+    ref: "Services",
+    required: true,
   },
+});
+
+projectSchema.pre(["find", "findOne", "save", "create"], function () {
+  this.populate({ path: "service_id", model: serviceModel });
 });
 
 const Model = model("project", projectSchema);

@@ -32,6 +32,7 @@ export const addProject = async (req, res) => {
       image: req.imagePath,
       link: req.body.link,
       due: req.body.due,
+      service_id: req.body.service_id
     });
 
     await newProject.save();
