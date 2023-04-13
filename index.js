@@ -25,7 +25,7 @@ app.use(express.json());
 app.use("/uploads", express.static("./uploads"));
 
 app.use("/team", teamRoutes);
-app.use("/admins", adminRoutes);
+app.use("/admin", adminRoutes);
 
 app.use((err, req, res, next) => {
   const errStatus = err.status || 500;
