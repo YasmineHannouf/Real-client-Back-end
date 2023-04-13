@@ -1,36 +1,21 @@
-import  aboutus from "../models/aboutus.js"
+import aboutusModel from "../models/aboutus.js";
 
-
-export async function getAboutusById(req, res) {
-  let { id } = req.params;
-      aboutus.findOne({ _id: id }, (err, response) => {
-          if (err) return next(err);
-          res.status(200).send({ success: true, response });
-      });
-}
-
-export async function createAboutus(req, res) {
-  const newAboutus = new aboutus({
-    image: req.body.imagePath,
-    description: req.body.description
-  });
-
+export const getAboutusById = async (req, res) => {
   try {
-    const data = await newAboutus.save();
-    res.status(201).json(data);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
+    const aboutus = await aboutusModel.findById(req.params.id);
+    res.status(200).json({ message: aboutus });
+  } catch (error) {
+    res.json({ err: error.message });
   }
-}
+};
 
 export const updateAboutus = async (req, res) => {
   try {
     let update = {
-      name: req.body.name,
-      description: req.body.description,
       image: req.imagePath,
+      description: req.body.description,
     };
-    const aboutus = await updateAboutus.findById(req.params.id);
+    const aboutus = await aboutusModel.findById(req.params.id);
 
     // check if the aboutus does not exist
     if (!aboutus) {
@@ -42,7 +27,7 @@ export const updateAboutus = async (req, res) => {
       fs.unlinkSync(aboutus.image);
     }
 
-    const updateAboutus = await updateAboutus.findByIdAndUpdate(
+    const updateAboutus = await aboutusModel.findByIdAndUpdate(
       req.params.id,
       { $set: update },
       {
@@ -50,10 +35,8 @@ export const updateAboutus = async (req, res) => {
       }
     );
 
-    res.status(200).json({ message: updatedtext });
+    res.status(200).json({ message: updateAboutus });
   } catch (error) {
     res.json({ err: error.message });
   }
 };
-
-
