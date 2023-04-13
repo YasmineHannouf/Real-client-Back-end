@@ -16,7 +16,7 @@ const serviceSchema = Schema(
     },
   },
   {
-    collection: "Service",
+    collection: "Services",
   }
 );
 
