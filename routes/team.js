@@ -1,5 +1,5 @@
 import express from "express";
-import imageHandler from "../middlewares/imageHandler.js";
+import { singleImage } from "../middlewares/imageHandler.js";
 import {
   addTeamMember,
   deleteTeamMember,
@@ -16,10 +16,10 @@ router.get("/", getMembers);
 router.get("/id/:id", getMember);
 
 // Add team member route
-router.post("/", imageHandler, addTeamMember);
+router.post("/", singleImage, addTeamMember);
 
 // Edit team member route
-router.patch("/edit/:id", imageHandler, editTeamMember);
+router.patch("/edit/:id", singleImage, editTeamMember);
 
 // Delete team member route
 router.delete("/delete/:id", deleteTeamMember);

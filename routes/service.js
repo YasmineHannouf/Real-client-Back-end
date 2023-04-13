@@ -1,5 +1,5 @@
 import express from "express";
-import imageHandler from "../middlewares/imageHandler.js";
+import  { singleImage } from "../middlewares/imageHandler.js";
 import {
   addService,
   deleteService,
@@ -16,10 +16,10 @@ router.get("/", getServices);
 router.get("/id/:id", getService);
 
 // Add service route
-router.post("/", imageHandler, addService);
+router.post("/", singleImage, addService);
 
 // Edit service route
-router.patch("/edit/:id", imageHandler, editService);
+router.patch("/edit/:id", singleImage, editService);
 
 // Delete service route
 router.delete("/delete/:id", deleteService);

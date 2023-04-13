@@ -24,7 +24,7 @@ const fileFilter = (req, file, cb) => {
 };
 const upload = multer({ storage, fileFilter });
 
-export default function (req, res, next) {
+export const singleImage = (req, res, next) => {
   upload.single("image")(req, res, (err) => {
     try {
       if (err) {
@@ -36,5 +36,18 @@ export default function (req, res, next) {
       return res.status(400).json({ err: err.message });
     }
   });
-}
+};
 
+export const mwultipleImage = (req, res, next) => {
+  upload.array("image")(req, res, (err) => {
+    try {
+      if (err) {
+        return res.status(400).json(err.message);
+      }
+      req.imagePath = req.file.path;
+      next();
+    } catch (err) {
+      return res.status(400).json({ err: err.message });
+    }
+  });
+};

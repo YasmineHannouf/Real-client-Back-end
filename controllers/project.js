@@ -1,4 +1,5 @@
 import projectModel from "../models/project.js";
+import serviceModel from "../models/service.js";
 
 // Get all projects of the team
 export const getProjects = async (req, res) => {
@@ -27,12 +28,18 @@ export const getProject = async (req, res) => {
 // Add a new project
 export const addProject = async (req, res) => {
   try {
+    const service = await serviceModel.findById(req.body.service_id);
+
+    // check if the service does not exist#
+    if (!service)
+      return res.json({ status: 404, message: "Service not found" });
+
     const newProject = new projectModel({
       title: req.body.title,
       image: req.imagePath,
       link: req.body.link,
       due: req.body.due,
-      service_id: req.body.service_id
+      service_id: req.body.service_id,
     });
 
     await newProject.save();

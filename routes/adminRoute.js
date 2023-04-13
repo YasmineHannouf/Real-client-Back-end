@@ -12,12 +12,22 @@ import {
   editAdmin,
 } from "../controllers/adminController.js"
 
+// register admin route
+adminRouter.post('/register',registerAdmin);
 
-adminRouter.post('/register',checkAuth,registerAdmin);
+// login admin route
 adminRouter.post('/login',loginAdmin);
+
+// get all admins route
 adminRouter.get('/', checkAuth ,getAdmins);
+
+// get admin by id route
 adminRouter.get('/:id', checkAuth ,getAdminByID);
+
+// edit admin by id route
 adminRouter.patch('/edit/:id', checkAuth ,editAdmin);
+
+// delete admin route
 adminRouter.delete('/:id', checkAuth, deleteAdmin);
 
 export default adminRouter;
