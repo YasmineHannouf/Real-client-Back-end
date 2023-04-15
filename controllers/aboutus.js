@@ -1,6 +1,7 @@
 import  aboutus from "../models/aboutus.js"
 
 
+
 export async function getAboutusById(req, res) {
   let { id } = req.params;
       aboutus.findOne({ _id: id }, (err, response) => {
@@ -55,5 +56,4 @@ export const updateAboutus = async (req, res) => {
     res.json({ err: error.message });
   }
 };
-
 
