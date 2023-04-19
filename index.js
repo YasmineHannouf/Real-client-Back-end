@@ -1,6 +1,5 @@
 import express from "express";
 const app = express();
-
 import cookieParser from "cookie-parser";
 
 
@@ -17,11 +16,11 @@ import trainingRoutes from "./routes/training.js";
 import AboutusRoutes from "./routes/aboutus.js";
 import serviceRoutes from "./routes/service.js";
 import contactusRoutes from "./routes/contactusRoute.js";
-
+import KidsRouter from "./routes/kidsRoute.js";
 
 connectDB();
 app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+app.use(express.json()); 
 
 
 app.use("/uploads", express.static("./uploads"));
@@ -30,6 +29,7 @@ app.use("/uploads", express.static("./uploads"));
 app.use("/team", teamRoutes);
 app.use("/training", trainingRoutes);
 app.use("/aboutus",AboutusRoutes)
+app.use("/kid", KidsRouter);
 app.use("/service",serviceRoutes)
 
 
