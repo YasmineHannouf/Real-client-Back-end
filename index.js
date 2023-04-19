@@ -1,6 +1,5 @@
 import express from "express";
 const app = express();
-
 import cookieParser from "cookie-parser";
 
 // import cors and use it
@@ -23,10 +22,11 @@ import serviceRoutes from "./routes/service.js";
 import contactusRoutes from "./routes/contactusRoute.js";
 import eventsRoutes from "./routes/eventsRoute.js";
 import projectRoutes from "./routes/project.js";
+import KidsRouter from "./routes/kidsRoute.js";
 
 connectDB();
 app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+app.use(express.json()); 
 
 app.use("/uploads", express.static("./uploads"));
 
@@ -34,6 +34,7 @@ app.use("/team", teamRoutes);
 app.use("/admin", adminRoutes);
 app.use("/training", trainingRoutes);
 app.use("/aboutus",AboutusRoutes)
+app.use("/kid", KidsRouter);
 app.use("/service",serviceRoutes)
 app.use("/project", projectRoutes);
 app.use('/api/contactus',contactusRoutes);
