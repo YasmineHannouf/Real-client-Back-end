@@ -58,7 +58,7 @@ const addKid = async (req, res, next) => {
 //   }
 // };
 
-// Edit a team member
+// Edit a kid
 const putKid = async (req, res) => {
   try {
     let update = {
@@ -94,7 +94,6 @@ const putKid = async (req, res) => {
 
 
 // Delete a Kid
-
 const deletekid = async (req, res, next) => {
   let id = req.params.id;
   try {

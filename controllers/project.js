@@ -59,7 +59,7 @@ export const editProject = async (req, res) => {
       due: req.body.due,
     };
     const project = await projectModel.findById(req.params.id);
-
+    
     // check if the project does not exist
     if (!project) {
       return res.status(404).json({ status: 404, message: "Not Found" });
