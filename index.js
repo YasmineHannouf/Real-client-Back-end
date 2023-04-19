@@ -1,8 +1,5 @@
 import express from "express";
-import AboutusRoutes from "./routes/aboutus.js";
-import KidsRouter from "./routes/kidsRoute.js";
 const app = express();
-
 import cookieParser from "cookie-parser";
 
 
@@ -16,7 +13,10 @@ import connectDB from "./config/db.js";
 // import routes
 import teamRoutes from "./routes/team.js";
 import trainingRoutes from "./routes/training.js";
-
+import AboutusRoutes from "./routes/aboutus.js";
+import serviceRoutes from "./routes/service.js";
+import contactusRoutes from "./routes/contactusRoute.js";
+import KidsRouter from "./routes/kidsRoute.js";
 
 connectDB();
 app.use(express.urlencoded({ extended: false }));
@@ -30,6 +30,7 @@ app.use("/team", teamRoutes);
 app.use("/training", trainingRoutes);
 app.use("/aboutus",AboutusRoutes)
 app.use("/kid", KidsRouter);
+app.use("/service",serviceRoutes)
 
 
 app.use((err, req, res, next) => {
@@ -42,6 +43,7 @@ app.use((err, req, res, next) => {
   });
 });
 
+  app.use('/api/contactus',contactusRoutes);
 app.listen(5000, () => {
   console.log("listening on port 5000");
 });
