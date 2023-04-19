@@ -47,7 +47,7 @@ export const editService = async (req, res) => {
     let update = {
       name: req.body.name,
       description: req.body.description,
-      image: req.body.imagePath,
+      image: req.imagePath,
     };
     const service = await serviceModel.findById(req.params.id);
 
