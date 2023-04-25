@@ -38,7 +38,7 @@ export const singleImage = (req, res, next) => {
   });
 };
 
-export const mwultipleImage = (req, res, next) => {
+export const multipleImage = (req, res, next) => {
   upload.array("image")(req, res, (err) => {
     try {
       if (err) {
