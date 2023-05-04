@@ -10,24 +10,24 @@ import {
   getAdminByID,
   deleteAdmin,
   editAdmin,
-} from "../controllers/adminController.js"
+} from "../controllers/adminController.js";
 
 // register admin route
-adminRouter.post('/register',registerAdmin);
+adminRouter.post("/register", registerAdmin);
 
 // login admin route
-adminRouter.post('/login',loginAdmin);
+adminRouter.post("/login", loginAdmin);
 
 // get all admins route
-adminRouter.get('/', checkAuth ,getAdmins);
+adminRouter.get("/", checkAuth, getAdmins);
 
 // get admin by id route
-adminRouter.get('/:id', checkAuth ,getAdminByID);
+adminRouter.get("/:id", checkAuth, getAdminByID);
 
 // edit admin by id route
-adminRouter.patch('/edit/:id', checkAuth ,editAdmin);
+adminRouter.patch("/edit/:id", checkAuth, editAdmin);
 
 // delete admin route
-adminRouter.delete('/:id', checkAuth, deleteAdmin);
+adminRouter.delete("/:id", checkAuth, deleteAdmin);
 
 export default adminRouter;

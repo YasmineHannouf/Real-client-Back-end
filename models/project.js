@@ -1,7 +1,12 @@
 import { Schema, model } from "mongoose";
-import serviceModel from "./service.js"
+import serviceModel from "./service.js";
+
 const projectSchema = Schema({
   title: {
+    type: String,
+    required: true,
+  },
+  description: {
     type: String,
     required: true,
   },

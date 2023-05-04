@@ -1,6 +1,6 @@
 import projectModel from "../models/project.js";
 import serviceModel from "../models/service.js";
-
+import fs from "fs";
 // Get all projects of the team
 export const getProjects = async (req, res) => {
   try {
@@ -36,6 +36,7 @@ export const addProject = async (req, res) => {
 
     const newProject = new projectModel({
       title: req.body.title,
+      description: req.body.description,
       image: req.imagePath,
       link: req.body.link,
       due: req.body.due,
@@ -43,6 +44,7 @@ export const addProject = async (req, res) => {
     });
 
     await newProject.save();
+
     res.status(200).json({ message: newProject });
   } catch (error) {
     res.json({ err: error.message });
@@ -54,19 +56,20 @@ export const editProject = async (req, res) => {
   try {
     let update = {
       title: req.body.title,
+      description: req.body.description,
       image: req.imagePath,
       link: req.body.link,
       due: req.body.due,
     };
     const project = await projectModel.findById(req.params.id);
-    
+
     // check if the project does not exist
     if (!project) {
       return res.status(404).json({ status: 404, message: "Not Found" });
     }
 
     // delete the old image
-    if (req.body.imagePath) {
+    if (req.imagePath) {
       fs.unlinkSync(project.image);
     }
 

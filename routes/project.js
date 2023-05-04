@@ -1,5 +1,5 @@
 import express from "express";
-import  { singleImage } from "../middlewares/imageHandler.js";
+import { singleImage } from "../middlewares/imageHandler.js";
 import {
   addProject,
   deleteProject,
