@@ -1,8 +1,8 @@
 import aboutusModel from "../models/aboutus.js";
 
-export const getAboutusById = async (req, res) => {
+export const getAbout = async (req, res) => {
   try {
-    const aboutus = await aboutusModel.findById(req.params.id);
+    const aboutus = await aboutusModel.find({});
     res.status(200).json({ message: aboutus });
   } catch (error) {
     res.json({ err: error.message });
@@ -40,3 +40,4 @@ export const updateAboutus = async (req, res) => {
     res.json({ err: error.message });
   }
 };
+ 

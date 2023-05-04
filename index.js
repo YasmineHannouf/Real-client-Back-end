@@ -33,7 +33,7 @@ app.use("/uploads", express.static("./uploads"));
 app.use("/team", teamRoutes);
 app.use("/admin", adminRoutes);
 app.use("/training", trainingRoutes);
-app.use("/aboutus",AboutusRoutes)
+app.use("/about",AboutusRoutes)
 app.use("/kid", KidsRouter);
 app.use("/service",serviceRoutes)
 app.use("/project", projectRoutes);
