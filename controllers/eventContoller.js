@@ -1,7 +1,6 @@
 import EventModel from "../models/eventModel.js";
 import fs from "fs";
 import serviceModel from "../models/service.js";
-[];
 
 // Get all events
 export const getEvents = async (req, res) => {
@@ -35,9 +34,11 @@ export const addEvent = async (req, res) => {
     // check if the service does not exist#
     if (!service)
       return res.json({ status: 404, message: "Service not found" });
+
     const newEvent = new EventModel({
       name: req.body.name,
       description: req.body.description,
+      due: req.body.due,
       image: req.imagePath,
       service_id: req.body.service_id,
     });
@@ -55,6 +56,8 @@ export const editEvent = async (req, res) => {
     let update = {
       name: req.body.name,
       description: req.body.description,
+      due: req.body.due,
+      image: req.imagePath,
       service: req.body.service,
     };
     const event = await EventModel.findById(req.params.id);
@@ -64,10 +67,9 @@ export const editEvent = async (req, res) => {
       return res.status(404).json({ status: 404, message: "Not Found" });
     }
 
-    if (req.body.image) {
+    if (req.imagePath) {
       // delete the old image
       fs.unlinkSync(event.image);
-      update.image = req.body.image;
     }
 
     const updatedEvent = await EventModel.findByIdAndUpdate(
@@ -99,12 +101,3 @@ export const deleteEvent = async (req, res) => {
     res.json({ err: error.message });
   }
 };
-
-const eventContoller = {
-  addEvent,
-  deleteEvent,
-  editEvent,
-  getEvent,
-  getEvents,
-};
-export default eventContoller;

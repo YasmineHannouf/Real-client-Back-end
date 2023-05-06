@@ -61,6 +61,13 @@ export const editProject = async (req, res) => {
       link: req.body.link,
       due: req.body.due,
     };
+
+    const updatedFields = {};
+    if (req.body.title) updatedFields.title = req.body.title;
+    if (req.body.description) updatedFields.description = req.body.description;
+    if (req.body.imagePath) updatedFields.imagePath = req.body.imagePath;
+    if (req.body.due) updatedFields.due = req.body.due;
+
     const project = await projectModel.findById(req.params.id);
 
     // check if the project does not exist
@@ -68,7 +75,7 @@ export const editProject = async (req, res) => {
       return res.status(404).json({ status: 404, message: "Not Found" });
     }
 
-    // delete the old image
+    // delete the old image 
     if (req.imagePath) {
       fs.unlinkSync(project.image);
     }

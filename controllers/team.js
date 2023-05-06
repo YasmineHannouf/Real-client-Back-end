@@ -47,7 +47,7 @@ export const editTeamMember = async (req, res) => {
     let update = {
       name: req.body.name,
       description: req.body.description,
-      image: req.body.imagePath,
+      image: req.imagePath,
     };
     const member = await teamMemberModel.findById(req.params.id);
 
@@ -57,7 +57,7 @@ export const editTeamMember = async (req, res) => {
     }
 
     // delete the old image
-    if (req.body.imagePath) {
+    if (req.imagePath) {
       fs.unlinkSync(member.image);
     }
 
@@ -78,18 +78,14 @@ export const editTeamMember = async (req, res) => {
 // Delete a team member
 export const deleteTeamMember = async (req, res) => {
   try {
-    await teamMemberModel
-      .findByIdAndDelete(req.params.id)
-      .then((response) => {
-        if (!response) {
-          res.status(404).send({ status: 404, message: "Not Found" });
-        } else {
-          fs.unlinkSync(response.image);
-          res
-            .status(200)
-            .send({ status: 200, message: "Deleted successfully" });
-        }
-      });
+    await teamMemberModel.findByIdAndDelete(req.params.id).then((response) => {
+      if (!response) {
+        res.status(404).send({ status: 404, message: "Not Found" });
+      } else {
+        fs.unlinkSync(response.image);
+        res.status(200).send({ status: 200, message: "Deleted successfully" });
+      }
+    });
   } catch (error) {
     res.json({ err: error.message });
   }

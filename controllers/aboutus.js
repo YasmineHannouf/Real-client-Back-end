@@ -9,18 +9,25 @@ export const getAbout = async (req, res) => {
   }
 };
 
+export const getAboutById = async (req, res) => {
+  try {
+    const about = await aboutusModel.findById(req.params.id);
+
+    // check if about doesn't exist
+    if (!about) return res.json("About Not Found");
+
+    res.status(200).json({ message: about });
+  } catch (error) {
+    res.json({ err: error.message });
+  }
+};
+
 export const updateAboutus = async (req, res) => {
   try {
     let update = {
-      image: req.imagePath,
       description: req.body.description,
+      image: req.imagePath,
     };
-    const aboutus = await aboutusModel.findById(req.params.id);
-
-    // check if the aboutus does not exist
-    if (!aboutus) {
-      return res.status(404).json({ status: 404, message: "Not Found" });
-    }
 
     // delete the old image
     if (req.body.imagePath) {
@@ -40,4 +47,3 @@ export const updateAboutus = async (req, res) => {
     res.json({ err: error.message });
   }
 };
- 

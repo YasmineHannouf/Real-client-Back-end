@@ -2,10 +2,10 @@ import Kids from "../models/kidsModel.js";
 import fs from "fs";
 // Get All Kids
 
-const getAllKids = async (req, res, next) => {
+export const getAllKids = async (req, res, next) => {
   try {
-    let response = await Kids.find();
-    res.status(200).send({ success: true, response });
+    let allKids = await Kids.find();
+    res.status(200).send({ message: allKids });
   } catch (error) {
     console.log(error);
     res.status(400).send({ error: true, error });
@@ -14,7 +14,7 @@ const getAllKids = async (req, res, next) => {
 
 // Get one Kid
 
-const getKid = async (req, res, next) => {
+export const getKid = async (req, res, next) => {
   try {
     let { id } = req.params;
     let response = await Kids.findOne({ _id: id });
@@ -27,8 +27,7 @@ const getKid = async (req, res, next) => {
 
 // add a kid
 
-const addKid = async (req, res, next) => {
-
+export const addKid = async (req, res, next) => {
   try {
     let newKid = new Kids({
       title: req.body.title,
@@ -59,12 +58,12 @@ const addKid = async (req, res, next) => {
 // };
 
 // Edit a kid
-const putKid = async (req, res) => {
+export const putKid = async (req, res) => {
   try {
     let update = {
-      title: req.body.name,
+      title: req.body.title,
       description: req.body.description,
-      image: req.body.imagePath,
+      image: req.imagePath,
     };
     const kid = await Kids.findById(req.params.id);
 
@@ -74,8 +73,8 @@ const putKid = async (req, res) => {
     }
 
     // delete the old image
-    if (req.body.imagePath) {
-      fs.unlinkSync(member.image);
+    if (req.imagePath) {
+      fs.unlinkSync(kid.image);
     }
 
     const updatedKid = await Kids.findByIdAndUpdate(
@@ -92,9 +91,8 @@ const putKid = async (req, res) => {
   }
 };
 
-
 // Delete a Kid
-const deletekid = async (req, res, next) => {
+export const deletekid = async (req, res, next) => {
   let id = req.params.id;
   try {
     let response = await Kids.findByIdAndRemove({ _id: id });
@@ -102,12 +100,4 @@ const deletekid = async (req, res, next) => {
   } catch (error) {
     res.status(400).send({ error: true, error });
   }
-};
-
-export default {
-  getAllKids,
-  getKid,
-  addKid,
-  putKid,
-  deletekid,
 };
