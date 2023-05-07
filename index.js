@@ -26,21 +26,19 @@ import KidsRouter from "./routes/kidsRoute.js";
 
 connectDB();
 app.use(express.urlencoded({ extended: false }));
-app.use(express.json()); 
+app.use(express.json());
 
 app.use("/uploads", express.static("./uploads"));
 
 app.use("/team", teamRoutes);
 app.use("/admin", adminRoutes);
 app.use("/training", trainingRoutes);
-app.use("/about",AboutusRoutes)
+app.use("/about", AboutusRoutes);
 app.use("/kid", KidsRouter);
-app.use("/service",serviceRoutes)
+app.use("/service", serviceRoutes);
 app.use("/project", projectRoutes);
-app.use('/api/contactus',contactusRoutes);
-app.use('/api/events',eventsRoutes)
-
-
+app.use("/contact", contactusRoutes);
+app.use("/api/events", eventsRoutes);
 
 app.use((err, req, res, next) => {
   const errStatus = err.status || 500;

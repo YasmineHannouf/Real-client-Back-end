@@ -1,6 +1,6 @@
 import Contact from "../models/contactusModel.js";
 
-async function getAll(req, res) {
+export async function getAll(req, res) {
   try {
     const contacts = await Contact.find();
     res.json({ message: contacts });
@@ -10,7 +10,7 @@ async function getAll(req, res) {
   }
 }
 
-async function getContactById(req, res) {
+export async function getContactById(req, res) {
   const id = req.params.id;
 
   try {
@@ -36,7 +36,7 @@ export async function addContact(req, res, next) {
   }
 }
 
-async function deleteContactById(req, res) {
+export async function deleteContactById(req, res) {
   const id = req.params.id;
 
   try {
@@ -50,11 +50,3 @@ async function deleteContactById(req, res) {
     res.status(500).json({ message: "Internal Server Error" });
   }
 }
-
-const contactusController = {
-  addContact,
-  getAll,
-  getContactById,
-  deleteContactById,
-};
-export default contactusController;
