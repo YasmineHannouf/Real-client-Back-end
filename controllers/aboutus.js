@@ -26,13 +26,7 @@ export const updateAboutus = async (req, res) => {
   try {
     let update = {
       description: req.body.description,
-      image: req.imagePath,
     };
-
-    // delete the old image
-    if (req.body.imagePath) {
-      fs.unlinkSync(aboutus.image);
-    }
 
     const updateAboutus = await aboutusModel.findByIdAndUpdate(
       req.params.id,

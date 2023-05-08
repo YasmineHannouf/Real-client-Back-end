@@ -12,6 +12,6 @@ router.get("/", getAbout);
 router.get("/:id", getAboutById);
 
 // Update an existing aboutus by ID
-router.patch("/edit/:id", singleImage, updateAboutus);
+router.patch("/edit/:id", updateAboutus);
 
 export default router;

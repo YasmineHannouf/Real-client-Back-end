@@ -54,14 +54,6 @@ export const addProject = async (req, res) => {
 // Edit a project
 export const editProject = async (req, res) => {
   try {
-    let update = {
-      title: req.body.title,
-      description: req.body.description,
-      image: req.imagePath,
-      link: req.body.link,
-      due: req.body.due,
-    };
-
     const updatedFields = {};
     if (req.body.title) updatedFields.title = req.body.title;
     if (req.body.description) updatedFields.description = req.body.description;
@@ -75,14 +67,15 @@ export const editProject = async (req, res) => {
       return res.status(404).json({ status: 404, message: "Not Found" });
     }
 
-    // delete the old image 
+    // delete the old image
     if (req.imagePath) {
       fs.unlinkSync(project.image);
     }
+    const editProject = { ...req.body, ...updatedFields };
 
     const updatedProject = await projectModel.findByIdAndUpdate(
       req.params.id,
-      { $set: update },
+      { $set: editProject },
       {
         new: true,
       }

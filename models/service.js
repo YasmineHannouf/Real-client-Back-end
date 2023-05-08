@@ -8,7 +8,6 @@ const serviceSchema = Schema(
     },
     description: {
       type: String,
-      required: [true, "Please enter a description"],
     },
     image: {
       type: String,

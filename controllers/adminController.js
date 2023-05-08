@@ -7,7 +7,7 @@ import Admin from "../models/Admin.js";
 export const getAdmins = async (req, res, next) => {
   try {
     const admin = await Admin.find({});
-    res.status(200).json({ admins: admin });
+    res.status(200).json({ message: admin });
   } catch (err) {
     res.status(400).json({ err: err.message });
   }

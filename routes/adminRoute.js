@@ -19,15 +19,15 @@ adminRouter.post("/register", registerAdmin);
 adminRouter.post("/login", loginAdmin);
 
 // get all admins route
-adminRouter.get("/", checkAuth, getAdmins);
+adminRouter.get("/", getAdmins);
 
 // get admin by id route
-adminRouter.get("/:id", checkAuth, getAdminByID);
+adminRouter.get("/:id", getAdminByID);
 
 // edit admin by id route
-adminRouter.patch("/edit/:id", checkAuth, editAdmin);
+adminRouter.patch("/edit/:id", editAdmin);
 
 // delete admin route
-adminRouter.delete("/:id", checkAuth, deleteAdmin);
+adminRouter.delete("/:id", deleteAdmin);
 
 export default adminRouter;
